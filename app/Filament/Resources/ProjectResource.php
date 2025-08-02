@@ -34,10 +34,9 @@ class ProjectResource extends Resource
                     ->default(request()->get('lead_id'))
                     ->required(),
 
-                Forms\Components\Select::make('products')
-                    ->relationship('products', 'name')
+                Forms\Components\Select::make('product_id')
+                    ->relationship('product', 'name')
                     ->label('Produk/Layanan yang Diajukan')
-                    ->multiple()
                     ->preload()
                     ->required(),
 
@@ -95,6 +94,7 @@ class ProjectResource extends Resource
                             ->success()
                             ->send();
                     }),
+                    Tables\Actions\ViewAction::make(),
             ]);
     }
 

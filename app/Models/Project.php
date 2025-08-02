@@ -25,10 +25,10 @@ class Project extends Model
     }
 
     // Project ini untuk layanan/produk apa saja? (Many-to-Many)
-    public function products(): BelongsToMany
+    public function product(): BelongsTo
     {
         // Pivot table 'project_product' akan dibuat
-        return $this->belongsToMany(Product::class);
+        return $this->belongsTo(Product::class, 'product_id');
     }
 
     // Siapa manager yang melakukan approval?

@@ -26,12 +26,18 @@ class LeadResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
-                    ->required(),
+                    ->required()
+                    ->placeholder('Nama Customer')
+                    ->label('Nama'),
                 Forms\Components\TextInput::make('email')
                     ->email()
+                    ->placeholder('customer@email.com')
+                    ->label('Email')
                     ->required(),
                 Forms\Components\TextInput::make('phone_number')
                     ->tel()
+                    ->placeholder('6282142785938')
+                    ->label('Nomor Telepon')
                     ->required(),
                 Forms\Components\Select::make('status')
                     ->required()
@@ -48,26 +54,23 @@ class LeadResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')->searchable(),
+                Tables\Columns\TextColumn::make('name')
+                    ->searchable()
+                    ->label('Nama'),
                 Tables\Columns\TextColumn::make('email'),
                 Tables\Columns\BadgeColumn::make('status')
                     ->colors([
                         'primary' => 'new',
                         'warning' => 'process',
                         'success' => 'done',
-                    ]),
+                    ])
+                    ->sortable(),
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\Action::make('createProject')
-                    ->label('Buat Project')
-                    ->icon('heroicon-o-briefcase')
-                    ->color('success')
-                    ->url(fn (Lead $record): string => ProjectResource::getUrl('create', ['lead_id' => $record->id]))
-                    ->hidden(fn (Lead $record) => $record->status !== 'new'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
