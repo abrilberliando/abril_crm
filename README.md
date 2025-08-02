@@ -14,6 +14,7 @@ Aplikasi CRM sederhana menggunakan Laravel 11, Filament, dan PostgreSQL untuk ma
 ## Persyaratan Sistem
 
 - PHP >= 8.2
+- Laravel >= 11
 - Composer
 - Node.js & NPM
 - PostgreSQL >= 14
