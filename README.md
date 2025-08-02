@@ -12,10 +12,10 @@ Aplikasi CRM sederhana menggunakan Laravel 11, Filament, dan PostgreSQL untuk ma
 
 ## Persyaratan Sistem
 
-- PHP >= 8.1
+- PHP >= 8.2
 - Composer
 - Node.js & NPM
-- PostgreSQL >= 12
+- PostgreSQL >= 14
 - Git
 
 ## Instalasi
@@ -55,8 +55,8 @@ Edit file `.env` dan sesuaikan konfigurasi PostgreSQL:
 DB_CONNECTION=pgsql
 DB_HOST=127.0.0.1
 DB_PORT=5432
-DB_DATABASE=laravel_crm
-DB_USERNAME=your_username
+DB_DATABASE=smart_app
+DB_USERNAME=postgres
 DB_PASSWORD=your_password
 ```
 
@@ -64,8 +64,7 @@ DB_PASSWORD=your_password
 
 ```bash
 # Buat database PostgreSQL
-createdb laravel_crm
-
+createdb smart_app
 # Jalankan migrasi
 php artisan migrate
 
