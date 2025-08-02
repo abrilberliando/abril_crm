@@ -1,61 +1,199 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Laravel CRM Application
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Aplikasi CRM sederhana menggunakan Laravel 11, Filament, dan PostgreSQL untuk manajemen customer dan project.
 
-## About Laravel
+## Fitur Utama
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- **Halaman Login** - Autentikasi pengguna
+- **Manajemen Lead** - Kelola calon customer
+- **Master Produk** - Kelola layanan/produk
+- **Manajemen Project** - Proses lead dengan approval manager
+- **Customer Berlangganan** - Kelola customer aktif dan layanannya
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Persyaratan Sistem
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- PHP >= 8.1
+- Composer
+- Node.js & NPM
+- PostgreSQL >= 12
+- Git
 
-## Learning Laravel
+## Instalasi
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### 1. Clone Repository
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+```bash
+git clone <repository-url>
+cd laravel-crm
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 2. Install Dependencies
 
-## Laravel Sponsors
+```bash
+# Install PHP dependencies
+composer install
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+# Install Node.js dependencies
+npm install
+```
 
-### Premium Partners
+### 3. Konfigurasi Environment
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+```bash
+# Copy file environment
+cp .env.example .env
 
-## Contributing
+# Generate application key
+php artisan key:generate
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 4. Konfigurasi Database
 
-## Code of Conduct
+Edit file `.env` dan sesuaikan konfigurasi PostgreSQL:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```env
+DB_CONNECTION=pgsql
+DB_HOST=127.0.0.1
+DB_PORT=5432
+DB_DATABASE=laravel_crm
+DB_USERNAME=your_username
+DB_PASSWORD=your_password
+```
 
-## Security Vulnerabilities
+### 5. Setup Database
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```bash
+# Buat database PostgreSQL
+createdb laravel_crm
 
-## License
+# Jalankan migrasi
+php artisan migrate
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+# Jalankan seeder (opsional)
+php artisan db:seed
+```
+
+### 6. Build Assets
+
+```bash
+# Compile assets untuk development
+npm run dev
+
+# Atau untuk production
+npm run build
+```
+
+### 7. Buat Admin User
+
+```bash
+php artisan make:filament-user
+```
+
+## Menjalankan Aplikasi
+
+### Development Server
+
+```bash
+# Jalankan Laravel server
+php artisan serve
+
+# Di terminal terpisah, jalankan Vite dev server
+npm run dev
+```
+
+Aplikasi akan berjalan di `http://localhost:8000`
+
+### Production
+
+```bash
+# Optimize aplikasi
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
+
+# Build assets
+npm run build
+```
+
+## Akses Filament Admin Panel
+
+Setelah aplikasi berjalan, akses admin panel di:
+
+```
+http://localhost:8000/admin
+```
+
+Login menggunakan kredensial yang dibuat saat setup admin user.
+
+## Struktur Menu Admin
+
+1. **Dashboard** - Ringkasan data
+2. **Leads** - Kelola calon customer
+3. **Products** - Master produk/layanan
+4. **Projects** - Manajemen project dengan approval
+5. **Customers** - Customer berlangganan
+6. **Users** - Manajemen pengguna (untuk admin)
+
+## Commands Berguna
+
+```bash
+# Reset database
+php artisan migrate:fresh --seed
+
+# Clear cache
+php artisan cache:clear
+php artisan config:clear
+php artisan route:clear
+php artisan view:clear
+
+# Generate Filament resource
+php artisan make:filament-resource ModelName
+
+# Queue worker (jika menggunakan jobs)
+php artisan queue:work
+```
+
+## Troubleshooting
+
+### Database Connection Error
+- Pastikan PostgreSQL service berjalan
+- Periksa kredensial database di file `.env`
+- Pastikan database sudah dibuat
+
+### Permission Error
+```bash
+# Fix storage permissions
+chmod -R 775 storage/
+chmod -R 775 bootstrap/cache/
+```
+
+### Asset Not Loading
+```bash
+# Clear dan rebuild assets
+npm run build
+php artisan view:clear
+```
+
+## Teknologi yang Digunakan
+
+- **Laravel 11** - PHP Framework
+- **Filament** - Admin Panel
+- **PostgreSQL** - Database
+- **Tailwind CSS** - Styling
+- **Alpine.js** - Frontend interactivity
+
+## Kontribusi
+
+1. Fork repository
+2. Buat feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit changes (`git commit -m 'Add AmazingFeature'`)
+4. Push ke branch (`git push origin feature/AmazingFeature`)
+5. Buat Pull Request
+
+## Lisensi
+
+Aplikasi ini menggunakan lisensi MIT. Lihat file `LICENSE` untuk detail.
+
+---
+
+**Catatan:** Pastikan semua persyaratan sistem terpenuhi sebelum instalasi. Untuk production, gunakan web server seperti Nginx atau Apache dengan konfigurasi yang sesuai.
