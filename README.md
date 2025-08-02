@@ -1,6 +1,7 @@
 # Laravel CRM Application
 
 Aplikasi CRM sederhana menggunakan Laravel 11, Filament, dan PostgreSQL untuk manajemen customer dan project.
+(12 Hours)
 
 ## Fitur Utama
 
